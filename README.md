@@ -8,9 +8,21 @@
 
 > if it's need change your `.env`.
 
+### Using docker-compose
+
+`docker-compose up -d`
+
+the pgweb can be accessed here: `http://localhost:8888/`
+
 ### Using yarn
 
 `yarn install`
+
+### Prisma
+
+Apply the migrations and initial state of prisma
+
+`yarn prisma db push`
 
 ### Development
 

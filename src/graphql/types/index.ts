@@ -1,1 +1,1 @@
-export * from './TaskTypes';
+export * from './task-types';

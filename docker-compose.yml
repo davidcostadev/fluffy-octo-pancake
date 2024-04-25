@@ -1,0 +1,18 @@
+version: '3.1'
+services:
+  database:
+    image: postgres:15.2
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: 123asd
+      POSTGRES_USER: root
+      POSTGRES_DB: viewstats_dev
+    ports:
+      - '5432:5432'
+  pgweb:
+    restart: always
+    image: sosedoff/pgweb
+    ports:
+      - '8888:8081'
+    environment:
+      DATABASE_URL: postgres://root:123asd@database:5432/viewstats_dev?sslmode=disable

@@ -1,12 +1,16 @@
 import { nonNull, objectType } from 'nexus';
+import { Task } from 'nexus-prisma';
 
-export const Task = objectType({
+export const TaskType = objectType({
   name: 'Task',
   definition(t) {
-    t.nonNull.id('id');
+    t.field('id', { type: nonNull('UUID') });
     t.string('title');
-    t.string('description');
-    t.boolean('completed');
+    t.field(Task.title);
+    t.field(Task.description);
+    t.field(Task.isCompleted);
+    t.field(Task.createdAt);
+    t.field(Task.updatedAt);
   },
 });
 
