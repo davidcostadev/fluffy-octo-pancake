@@ -2,6 +2,12 @@
 
 ## Installation
 
+### Create your env
+
+`cp .env.example .env`
+
+> if it's need change your `.env`.
+
 ### Using yarn
 
 `yarn install`
@@ -17,3 +23,7 @@
 ### Running in Producing
 
 `yarn start`
+
+### Generating graphql types and hooks
+
+`yarn generate`
