@@ -4,18 +4,23 @@ import * as Apollo from '@apollo/client';
 import * as Types from './types';
 
 const defaultOptions = {} as const;
-
+export const TaskFragmentDoc = gql`
+  fragment Task on Task {
+    completed
+    description
+    id
+    title
+  }
+`;
 export const TasksDocument = gql`
   query Tasks {
     tasks {
       data {
-        completed
-        description
-        id
-        title
+        ...Task
       }
     }
   }
+  ${TaskFragmentDoc}
 `;
 
 /**

@@ -23,18 +23,26 @@ export type Task = {
   __typename?: 'Task';
   completed?: Maybe<Scalars['Boolean']['output']>;
   description?: Maybe<Scalars['String']['output']>;
-  id?: Maybe<Scalars['ID']['output']>;
+  id: Scalars['ID']['output'];
   title?: Maybe<Scalars['String']['output']>;
 };
 
 export type TaskListResult = {
   __typename?: 'TaskListResult';
-  data?: Maybe<Array<Maybe<Task>>>;
+  data?: Maybe<Array<Task>>;
 };
 
 export type TaskSingleResult = {
   __typename?: 'TaskSingleResult';
   data?: Maybe<Task>;
+};
+
+export type TaskFragment = {
+  __typename?: 'Task';
+  completed?: boolean | null;
+  description?: string | null;
+  id: string;
+  title?: string | null;
 };
 
 export type TasksQueryVariables = Exact<{ [key: string]: never }>;
@@ -47,8 +55,8 @@ export type TasksQuery = {
       __typename?: 'Task';
       completed?: boolean | null;
       description?: string | null;
-      id?: string | null;
+      id: string;
       title?: string | null;
-    } | null> | null;
+    }> | null;
   } | null;
 };

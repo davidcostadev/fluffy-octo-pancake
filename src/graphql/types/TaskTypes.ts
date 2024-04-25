@@ -1,9 +1,9 @@
-import { objectType } from 'nexus';
+import { nonNull, objectType } from 'nexus';
 
 export const Task = objectType({
   name: 'Task',
   definition(t) {
-    t.id('id');
+    t.nonNull.id('id');
     t.string('title');
     t.string('description');
     t.boolean('completed');
@@ -13,7 +13,7 @@ export const Task = objectType({
 export const TaskListResult = objectType({
   name: 'TaskListResult',
   definition(t) {
-    t.list.field('data', { type: 'Task' });
+    t.list.field('data', { type: nonNull('Task') });
   },
 });
 

@@ -1,12 +1,12 @@
 import { Circle, Edit, Trash2 } from 'lucide-react';
 import { useState } from 'react';
+import { TaskFragment } from 'services/graphql/types';
 
 import { TaskAddForm } from 'core/components/forms/task-add-form';
 import { Button } from 'core/components/ui/button';
-import { Task } from 'core/types/api';
 
 type TaskCardProps = {
-  task: Task;
+  task: TaskFragment;
 };
 
 export const TaskCard = ({ task }: TaskCardProps) => {

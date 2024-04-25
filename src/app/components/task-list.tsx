@@ -1,14 +1,17 @@
 'use client';
 
+import { useTasksQuery } from 'services/graphql/hooks';
+
 import { ErrorAlert } from 'core/components/cards/error-alert';
 import { TaskCard } from 'core/components/cards/task-card';
 import { TasksLoading } from 'core/components/loading-placeholders/tasks-loading';
-import { useTasks } from 'core/hooks/useTasks';
 
 export const TaskList = () => {
-  const { data, error, loading } = useTasks(false);
+  const { data, error, loading } = useTasksQuery();
 
-  const amountOfTasks = data?.length ?? 0;
+  const amountOfTasks = data?.tasks?.data?.length ?? 0;
+
+  const tasks = data?.tasks?.data ?? [];
 
   return (
     <>
@@ -27,9 +30,9 @@ export const TaskList = () => {
           <>
             <ErrorAlert error={error} />
 
-            {data && data.length > 0 && (
+            {tasks.length > 0 && (
               <div className="flex flex-col gap-2">
-                {data.map((task) => (
+                {tasks.map((task) => (
                   <TaskCard key={task.id} task={task} />
                 ))}
               </div>
