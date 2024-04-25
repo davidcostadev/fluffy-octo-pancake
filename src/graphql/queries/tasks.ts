@@ -6,16 +6,20 @@ export const Tasks = queryField('tasks', {
     return {
       data: [
         {
-          id: '1',
+          id: '3d917535-5249-413e-b9ab-97e1f8bcc053',
           title: 'Task 1',
           description: 'Description 1',
-          completed: false,
+          isCompleted: false,
+          createdAt: new Date().toISOString(),
+          updatedAt: new Date().toISOString(),
         },
         {
-          id: '2',
+          id: '362f4a76-fb8e-4c4d-a805-6e955fd28364',
           title: 'Task 2',
-          description: 'Description 2',
-          completed: true,
+          description: null,
+          isCompleted: true,
+          createdAt: new Date().toISOString(),
+          updatedAt: new Date().toISOString(),
         },
       ],
     };

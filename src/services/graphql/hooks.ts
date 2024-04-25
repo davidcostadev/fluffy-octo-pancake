@@ -6,10 +6,12 @@ import * as Types from './types';
 const defaultOptions = {} as const;
 export const TaskFragmentDoc = gql`
   fragment Task on Task {
-    completed
+    isCompleted
     description
     id
     title
+    createdAt
+    updatedAt
   }
 `;
 export const TasksDocument = gql`

@@ -25,7 +25,7 @@ export const TaskCard = ({ task }: TaskCardProps) => {
       </button>
       <div className="flex flex-1 flex-col gap-2">
         <h4 className="text-sm font-semibold">{task.title}</h4>
-        <p className="text-sm text-slate-900/50">{task.description}</p>
+        <p className="min-h-5 text-sm text-slate-900/50">{task.description}</p>
       </div>
       <div className="flex gap-1 opacity-0 transition-opacity group-hover:opacity-100">
         <Button type="button" variant="ghost" size="icon" onClick={handleEditFormVisibility}>

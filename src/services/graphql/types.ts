@@ -12,6 +12,10 @@ export type Scalars = {
   Boolean: { input: boolean; output: boolean };
   Int: { input: number; output: number };
   Float: { input: number; output: number };
+  /** A date-time string at UTC, such as 2007-12-03T10:15:30Z, compliant with the `date-time` format outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard for representation of dates and times using the Gregorian calendar. */
+  DateTime: { input: string; output: string };
+  /** A field whose value is a generic Universally Unique Identifier: https://en.wikipedia.org/wiki/Universally_unique_identifier. */
+  UUID: { input: string; output: string };
 };
 
 export type Query = {
@@ -21,10 +25,12 @@ export type Query = {
 
 export type Task = {
   __typename?: 'Task';
-  completed?: Maybe<Scalars['Boolean']['output']>;
-  description?: Maybe<Scalars['String']['output']>;
-  id: Scalars['ID']['output'];
-  title?: Maybe<Scalars['String']['output']>;
+  createdAt: Scalars['DateTime']['output'];
+  description: Scalars['String']['output'];
+  id: Scalars['UUID']['output'];
+  isCompleted: Scalars['String']['output'];
+  title: Scalars['String']['output'];
+  updatedAt: Scalars['DateTime']['output'];
 };
 
 export type TaskListResult = {
@@ -39,10 +45,12 @@ export type TaskSingleResult = {
 
 export type TaskFragment = {
   __typename?: 'Task';
-  completed?: boolean | null;
-  description?: string | null;
+  isCompleted: string;
+  description: string;
   id: string;
-  title?: string | null;
+  title: string;
+  createdAt: string;
+  updatedAt: string;
 };
 
 export type TasksQueryVariables = Exact<{ [key: string]: never }>;
@@ -53,10 +61,12 @@ export type TasksQuery = {
     __typename?: 'TaskListResult';
     data?: Array<{
       __typename?: 'Task';
-      completed?: boolean | null;
-      description?: string | null;
+      isCompleted: string;
+      description: string;
       id: string;
-      title?: string | null;
+      title: string;
+      createdAt: string;
+      updatedAt: string;
     }> | null;
   } | null;
 };

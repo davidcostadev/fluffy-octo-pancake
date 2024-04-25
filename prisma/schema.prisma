@@ -20,8 +20,8 @@ datasource db {
 model Task {
   id          String   @id @default(uuid())
   title       String
-  description String
-  isCompleted String   @map("is_completed")
+  description String?
+  isCompleted Boolean  @default(false) @map("is_completed")
   createdAt   DateTime @default(now()) @map("created_at")
   updatedAt   DateTime @updatedAt @map("updated_at")
 
