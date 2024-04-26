@@ -3,7 +3,11 @@ import { queryField } from 'nexus';
 export const Tasks = queryField('tasks', {
   type: 'TaskListResult',
   resolve: async (_root, _args, ctx) => {
-    const data = await ctx.prisma.task.findMany();
+    const data = await ctx.prisma.task.findMany({
+      orderBy: {
+        createdAt: 'asc',
+      },
+    });
 
     return {
       data,
