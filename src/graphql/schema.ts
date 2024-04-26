@@ -1,8 +1,9 @@
-import { GraphQLScalarType } from 'graphql';
 import { GraphQLUUID } from 'graphql-scalars';
 import { DateTimeResolver } from 'graphql-scalars';
 import { asNexusMethod, makeSchema, scalarType } from 'nexus';
 import * as path from 'path';
+
+import { GraphQLScalarType } from 'graphql';
 
 import * as inputs from './inputs';
 import * as Mutations from './mutations';
