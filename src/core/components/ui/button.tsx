@@ -10,6 +10,7 @@ const buttonVariants = cva(
         ghost: 'font-semibold hover:bg-gray-100/50 active:bg-gray-100 disabled:bg-gray-100',
         success:
           'bg-purple-400 text-white  font-semibold hover:bg-purple-500 active:bg-purple-500/80 disabled:bg-purple-400',
+        danger: 'bg-red-400 text-white  font-semibold hover:bg-red-500 active:bg-red-500/80 disabled:bg-red-400',
       },
       size: {
         default: 'text-sm px-4 py-2',

@@ -4,6 +4,7 @@ import { TaskFragment } from 'services/graphql/types';
 
 import { TaskAddForm } from 'core/components/forms/task-add-form';
 import { Button } from 'core/components/ui/button';
+import { useConfirm } from 'core/components/ui/confirm';
 
 type TaskCardProps = {
   task: TaskFragment;
@@ -11,11 +12,26 @@ type TaskCardProps = {
 
 export const TaskCard = ({ task }: TaskCardProps) => {
   const [editFormVisibility, setEditFormVisibility] = useState(false);
+  const { showConfirm } = useConfirm();
 
   const handleEditFormVisibility = () => setEditFormVisibility(!editFormVisibility);
 
+  const handleDelete = async (): Promise<void> => {
+    const isConfirmed = await showConfirm('Are you sure you want to delete this?');
+
+    if (isConfirmed) {
+      console.log('Item deleted');
+    } else {
+      console.log('Cancelled');
+    }
+  };
+
+  const handleOnSave = () => {
+    console.log('on save');
+  };
+
   if (editFormVisibility) {
-    return <TaskAddForm onCancel={handleEditFormVisibility} />;
+    return <TaskAddForm onCancel={handleEditFormVisibility} onSave={handleOnSave} />;
   }
 
   return (
@@ -31,7 +47,7 @@ export const TaskCard = ({ task }: TaskCardProps) => {
         <Button type="button" variant="ghost" size="icon" onClick={handleEditFormVisibility}>
           <Edit size={16} />
         </Button>
-        <Button type="button" variant="ghost" size="icon">
+        <Button type="button" variant="ghost" size="icon" onClick={handleDelete}>
           <Trash2 size={16} />
         </Button>
       </div>
