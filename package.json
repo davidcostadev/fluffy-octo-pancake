@@ -4,8 +4,8 @@
   "private": true,
   "scripts": {
     "dev": "env-cmd next dev",
-    "build": "env-cmd next build",
-    "start": "env-cmd next start",
+    "build": "next build",
+    "start": "next start",
     "lint": "eslint . --max-warnings 0",
     "format": "prettier --write \"**/*.{ts,tsx,js,json}\"",
     "generate": "graphql-codegen"
