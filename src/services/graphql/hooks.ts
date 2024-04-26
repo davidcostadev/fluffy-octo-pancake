@@ -101,3 +101,50 @@ export type TaskCreateMutationOptions = Apollo.BaseMutationOptions<
   Types.TaskCreateMutation,
   Types.TaskCreateMutationVariables
 >;
+export const TaskDestroyDocument = gql`
+  mutation TaskDestroy($taskId: UUID!) {
+    taskDestroy(taskId: $taskId) {
+      data {
+        ...Task
+      }
+    }
+  }
+  ${TaskFragmentDoc}
+`;
+export type TaskDestroyMutationFn = Apollo.MutationFunction<
+  Types.TaskDestroyMutation,
+  Types.TaskDestroyMutationVariables
+>;
+
+/**
+ * __useTaskDestroyMutation__
+ *
+ * To run a mutation, you first call `useTaskDestroyMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useTaskDestroyMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [taskDestroyMutation, { data, loading, error }] = useTaskDestroyMutation({
+ *   variables: {
+ *      taskId: // value for 'taskId'
+ *   },
+ * });
+ */
+export function useTaskDestroyMutation(
+  baseOptions?: Apollo.MutationHookOptions<Types.TaskDestroyMutation, Types.TaskDestroyMutationVariables>,
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useMutation<Types.TaskDestroyMutation, Types.TaskDestroyMutationVariables>(
+    TaskDestroyDocument,
+    options,
+  );
+}
+export type TaskDestroyMutationHookResult = ReturnType<typeof useTaskDestroyMutation>;
+export type TaskDestroyMutationResult = Apollo.MutationResult<Types.TaskDestroyMutation>;
+export type TaskDestroyMutationOptions = Apollo.BaseMutationOptions<
+  Types.TaskDestroyMutation,
+  Types.TaskDestroyMutationVariables
+>;

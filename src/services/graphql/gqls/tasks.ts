@@ -34,3 +34,15 @@ export const TASK_CREATE = gql`
 
   ${TaskFragment}
 `;
+
+export const TASK_DESTROY = gql`
+  mutation TaskDestroy($taskId: UUID!) {
+    taskDestroy(taskId: $taskId) {
+      data {
+        ...Task
+      }
+    }
+  }
+
+  ${TaskFragment}
+`;

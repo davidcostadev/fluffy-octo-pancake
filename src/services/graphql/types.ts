@@ -21,10 +21,15 @@ export type Scalars = {
 export type Mutation = {
   __typename?: 'Mutation';
   taskCreate: TaskSingleResult;
+  taskDestroy: TaskSingleResult;
 };
 
 export type MutationTaskCreateArgs = {
   input: TaskCreateInput;
+};
+
+export type MutationTaskDestroyArgs = {
+  taskId: Scalars['UUID']['input'];
 };
 
 export type Query = {
@@ -92,6 +97,26 @@ export type TaskCreateMutationVariables = Exact<{
 export type TaskCreateMutation = {
   __typename?: 'Mutation';
   taskCreate: {
+    __typename?: 'TaskSingleResult';
+    data?: {
+      __typename?: 'Task';
+      isCompleted: boolean;
+      description?: string | null;
+      id: string;
+      title: string;
+      createdAt: string;
+      updatedAt: string;
+    } | null;
+  };
+};
+
+export type TaskDestroyMutationVariables = Exact<{
+  taskId: Scalars['UUID']['input'];
+}>;
+
+export type TaskDestroyMutation = {
+  __typename?: 'Mutation';
+  taskDestroy: {
     __typename?: 'TaskSingleResult';
     data?: {
       __typename?: 'Task';

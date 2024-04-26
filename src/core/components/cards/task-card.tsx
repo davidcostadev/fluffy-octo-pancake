@@ -1,10 +1,12 @@
 import { Circle, Edit, Trash2 } from 'lucide-react';
 import { useState } from 'react';
-import { TaskFragment } from 'services/graphql/types';
+import { toast } from 'react-hot-toast';
 
 import { TaskAddForm } from 'core/components/forms/task-add-form';
 import { Button } from 'core/components/ui/button';
 import { useConfirm } from 'core/components/ui/confirm';
+import { useTaskDestroyMutation } from 'services/graphql/hooks';
+import { TaskFragment } from 'services/graphql/types';
 
 type TaskCardProps = {
   task: TaskFragment;
@@ -13,16 +15,31 @@ type TaskCardProps = {
 export const TaskCard = ({ task }: TaskCardProps) => {
   const [editFormVisibility, setEditFormVisibility] = useState(false);
   const { showConfirm } = useConfirm();
+  const [taskDestroy] = useTaskDestroyMutation();
 
   const handleEditFormVisibility = () => setEditFormVisibility(!editFormVisibility);
 
   const handleDelete = async (): Promise<void> => {
     const isConfirmed = await showConfirm('Are you sure you want to delete this?');
 
-    if (isConfirmed) {
-      console.log('Item deleted');
-    } else {
-      console.log('Cancelled');
+    if (!isConfirmed) return;
+
+    try {
+      const { data } = await taskDestroy({
+        variables: {
+          taskId: task.id,
+        },
+        refetchQueries: ['Tasks'],
+      });
+
+      if (data?.taskDestroy.data?.id) {
+        toast.success('Task deleted successfully');
+      } else {
+        throw new Error('Failed to add task');
+      }
+    } catch (error) {
+      console.error(error);
+      toast.error(`${error}`);
     }
   };
 

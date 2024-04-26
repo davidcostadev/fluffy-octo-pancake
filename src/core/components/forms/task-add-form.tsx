@@ -2,13 +2,13 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { LoaderCircle } from 'lucide-react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-hot-toast';
-import { useTaskCreateMutation } from 'services/graphql/hooks';
 import z from 'zod';
 
 import { InputControlled } from 'core/components/forms/controlled/input-controlled';
 import { TextareaControlled } from 'core/components/forms/controlled/textarea-controlled';
 import { Button } from 'core/components/ui/button';
 import { TaskAddSchema } from 'core/validations/task-schema';
+import { useTaskCreateMutation } from 'services/graphql/hooks';
 
 type TaskAddFormProps = {
   onCancel: () => void;
@@ -49,7 +49,7 @@ export const TaskAddForm = ({ onCancel, onSave }: TaskAddFormProps) => {
       }
     } catch (error) {
       console.error(error);
-      toast.error('Failed to add task');
+      toast.error(`${error}`);
     }
   };
 
