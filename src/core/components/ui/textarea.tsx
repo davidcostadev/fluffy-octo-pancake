@@ -20,12 +20,14 @@ const inputVariants = cva(
   },
 );
 
-interface TextareaVariantProps extends VariantProps<typeof inputVariants> {}
+interface TextareaVariantProps extends VariantProps<typeof inputVariants> {
+  textareaRef?: React.Ref<HTMLTextAreaElement>;
+}
 
 interface TextareaAttributes extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {}
 
-type TextareaProps = TextareaVariantProps & Omit<TextareaAttributes, 'size'>;
+export type TextareaProps = TextareaVariantProps & Omit<TextareaAttributes, 'size'>;
 
-export const Textarea = ({ variant, size, className, ...props }: TextareaProps) => {
-  return <textarea className={inputVariants({ variant, size, className })} {...props} />;
+export const Textarea = ({ variant, size, className, textareaRef, ...props }: TextareaProps) => {
+  return <textarea className={inputVariants({ variant, size, className })} {...props} ref={textareaRef} />;
 };

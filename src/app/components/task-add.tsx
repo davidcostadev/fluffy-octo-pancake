@@ -11,6 +11,10 @@ export const TaskAdd = () => {
 
   const handleFormVisibility = () => setFormVisibility(!formVisibility);
 
+  const handleSave = () => {
+    setFormVisibility(false);
+  };
+
   if (!formVisibility) {
     return (
       <div className="py-2">
@@ -22,5 +26,5 @@ export const TaskAdd = () => {
     );
   }
 
-  return <TaskAddForm onCancel={handleFormVisibility} />;
+  return <TaskAddForm onCancel={handleFormVisibility} onSave={handleSave} />;
 };

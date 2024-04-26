@@ -1,11 +1,16 @@
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
+import { Toaster } from 'react-hot-toast';
 
 import { ApolloWrapper } from 'config/apollo/apollo-wrapper';
 
 import './globals.css';
 
-const inter = Inter({ subsets: ['latin'] });
+const inter = Inter({
+  variable: '--font-inter',
+  display: 'swap',
+  subsets: ['latin'],
+});
 
 export const metadata: Metadata = {
   title: 'David Costa - Viewstats Full Stack Project',
@@ -20,8 +25,11 @@ export default function RootLayout({
 }>) {
   return (
     <ApolloWrapper>
-      <html lang="en">
-        <body className={inter.className}>{children}</body>
+      <html lang="en" className={`${inter.variable}`}>
+        <body className="font-inter">
+          {children}
+          <Toaster />
+        </body>
       </html>
     </ApolloWrapper>
   );
