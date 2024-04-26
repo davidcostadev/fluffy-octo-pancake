@@ -4,8 +4,9 @@
   "private": true,
   "scripts": {
     "dev": "env-cmd next dev",
-    "prisma:migrate": "prisma migrate deploy",
-    "build": "yarn prisma:migrate && next build",
+    "prisma:generate": "yarn prisma generate",
+    "prisma:migrate": "yarn prisma migrate deploy",
+    "build": "yarn prisma:generate && yarn prisma:migrate && next build",
     "start": "next start",
     "lint": "eslint . --max-warnings 0",
     "format": "prettier --write \"**/*.{ts,tsx,js,json}\"",
