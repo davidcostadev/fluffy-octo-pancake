@@ -2,6 +2,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { LoaderCircle } from 'lucide-react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-hot-toast';
+import { useTaskCreateMutation } from 'services/graphql/hooks';
 import z from 'zod';
 
 import { InputControlled } from 'core/components/forms/controlled/input-controlled';
@@ -15,6 +16,8 @@ type TaskAddFormProps = {
 };
 
 export const TaskAddForm = ({ onCancel, onSave }: TaskAddFormProps) => {
+  const [createTask] = useTaskCreateMutation();
+
   const form = useForm<z.infer<typeof TaskAddSchema>>({
     resolver: zodResolver(TaskAddSchema),
     defaultValues: {
@@ -30,12 +33,20 @@ export const TaskAddForm = ({ onCancel, onSave }: TaskAddFormProps) => {
   } = form;
 
   const onSubmit = async (data: z.infer<typeof TaskAddSchema>) => {
-    await new Promise((resolve) => setTimeout(resolve, 5000));
-
     try {
-      console.log('submit', data);
-      onSave();
-      toast.success('Task added successfully');
+      const { data: task } = await createTask({
+        variables: {
+          input: data,
+        },
+        refetchQueries: ['Tasks'],
+      });
+
+      if (task?.taskCreate.data?.id) {
+        onSave();
+        toast.success('Task added successfully');
+      } else {
+        throw new Error('Failed to add task');
+      }
     } catch (error) {
       console.error(error);
       toast.error('Failed to add task');

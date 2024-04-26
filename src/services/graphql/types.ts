@@ -18,6 +18,15 @@ export type Scalars = {
   UUID: { input: string; output: string };
 };
 
+export type Mutation = {
+  __typename?: 'Mutation';
+  taskCreate: TaskSingleResult;
+};
+
+export type MutationTaskCreateArgs = {
+  input: TaskCreateInput;
+};
+
 export type Query = {
   __typename?: 'Query';
   tasks?: Maybe<TaskListResult>;
@@ -26,11 +35,16 @@ export type Query = {
 export type Task = {
   __typename?: 'Task';
   createdAt: Scalars['DateTime']['output'];
-  description: Scalars['String']['output'];
+  description?: Maybe<Scalars['String']['output']>;
   id: Scalars['UUID']['output'];
-  isCompleted: Scalars['String']['output'];
+  isCompleted: Scalars['Boolean']['output'];
   title: Scalars['String']['output'];
   updatedAt: Scalars['DateTime']['output'];
+};
+
+export type TaskCreateInput = {
+  description?: InputMaybe<Scalars['String']['input']>;
+  title: Scalars['String']['input'];
 };
 
 export type TaskListResult = {
@@ -45,8 +59,8 @@ export type TaskSingleResult = {
 
 export type TaskFragment = {
   __typename?: 'Task';
-  isCompleted: string;
-  description: string;
+  isCompleted: boolean;
+  description?: string | null;
   id: string;
   title: string;
   createdAt: string;
@@ -61,12 +75,32 @@ export type TasksQuery = {
     __typename?: 'TaskListResult';
     data?: Array<{
       __typename?: 'Task';
-      isCompleted: string;
-      description: string;
+      isCompleted: boolean;
+      description?: string | null;
       id: string;
       title: string;
       createdAt: string;
       updatedAt: string;
     }> | null;
   } | null;
+};
+
+export type TaskCreateMutationVariables = Exact<{
+  input: TaskCreateInput;
+}>;
+
+export type TaskCreateMutation = {
+  __typename?: 'Mutation';
+  taskCreate: {
+    __typename?: 'TaskSingleResult';
+    data?: {
+      __typename?: 'Task';
+      isCompleted: boolean;
+      description?: string | null;
+      id: string;
+      title: string;
+      createdAt: string;
+      updatedAt: string;
+    } | null;
+  };
 };

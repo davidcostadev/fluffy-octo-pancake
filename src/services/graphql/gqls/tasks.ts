@@ -22,3 +22,15 @@ export const TASKS = gql`
 
   ${TaskFragment}
 `;
+
+export const TASK_CREATE = gql`
+  mutation TaskCreate($input: TaskCreateInput!) {
+    taskCreate(input: $input) {
+      data {
+        ...Task
+      }
+    }
+  }
+
+  ${TaskFragment}
+`;
