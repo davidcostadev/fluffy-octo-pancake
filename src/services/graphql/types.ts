@@ -22,6 +22,7 @@ export type Mutation = {
   __typename?: 'Mutation';
   taskCreate: TaskSingleResult;
   taskDestroy: TaskSingleResult;
+  taskUpdate: TaskSingleResult;
 };
 
 export type MutationTaskCreateArgs = {
@@ -29,6 +30,11 @@ export type MutationTaskCreateArgs = {
 };
 
 export type MutationTaskDestroyArgs = {
+  taskId: Scalars['UUID']['input'];
+};
+
+export type MutationTaskUpdateArgs = {
+  input: TaskUpdateInput;
   taskId: Scalars['UUID']['input'];
 };
 
@@ -60,6 +66,12 @@ export type TaskListResult = {
 export type TaskSingleResult = {
   __typename?: 'TaskSingleResult';
   data?: Maybe<Task>;
+};
+
+export type TaskUpdateInput = {
+  description?: InputMaybe<Scalars['String']['input']>;
+  isCompleted?: InputMaybe<Scalars['Boolean']['input']>;
+  title?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type TaskFragment = {
@@ -97,6 +109,27 @@ export type TaskCreateMutationVariables = Exact<{
 export type TaskCreateMutation = {
   __typename?: 'Mutation';
   taskCreate: {
+    __typename?: 'TaskSingleResult';
+    data?: {
+      __typename?: 'Task';
+      isCompleted: boolean;
+      description?: string | null;
+      id: string;
+      title: string;
+      createdAt: string;
+      updatedAt: string;
+    } | null;
+  };
+};
+
+export type TaskUpdateMutationVariables = Exact<{
+  taskId: Scalars['UUID']['input'];
+  input: TaskUpdateInput;
+}>;
+
+export type TaskUpdateMutation = {
+  __typename?: 'Mutation';
+  taskUpdate: {
     __typename?: 'TaskSingleResult';
     data?: {
       __typename?: 'Task';

@@ -1,10 +1,9 @@
 'use client';
 
-import { useTasksQuery } from 'services/graphql/hooks';
-
 import { ErrorAlert } from 'core/components/cards/error-alert';
 import { TaskCard } from 'core/components/cards/task-card';
 import { TasksLoading } from 'core/components/loading-placeholders/tasks-loading';
+import { useTasksQuery } from 'services/graphql/hooks';
 
 export const TaskList = () => {
   const { data, error, loading } = useTasksQuery();

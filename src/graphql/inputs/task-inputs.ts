@@ -7,3 +7,12 @@ export const TaskCreateInput = inputObjectType({
     t.string('description');
   },
 });
+
+export const TaskUpdateInput = inputObjectType({
+  name: 'TaskUpdateInput',
+  definition(t) {
+    t.string('title');
+    t.string('description');
+    t.boolean('isCompleted');
+  },
+});

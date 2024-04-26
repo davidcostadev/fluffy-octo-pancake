@@ -2,7 +2,7 @@ import { Circle, Edit, Trash2 } from 'lucide-react';
 import { useState } from 'react';
 import { toast } from 'react-hot-toast';
 
-import { TaskAddForm } from 'core/components/forms/task-add-form';
+import { TaskEditForm } from 'core/components/forms/task-edit-form';
 import { Button } from 'core/components/ui/button';
 import { useConfirm } from 'core/components/ui/confirm';
 import { useTaskDestroyMutation } from 'services/graphql/hooks';
@@ -44,11 +44,11 @@ export const TaskCard = ({ task }: TaskCardProps) => {
   };
 
   const handleOnSave = () => {
-    console.log('on save');
+    setEditFormVisibility(false);
   };
 
   if (editFormVisibility) {
-    return <TaskAddForm onCancel={handleEditFormVisibility} onSave={handleOnSave} />;
+    return <TaskEditForm onCancel={handleEditFormVisibility} onSave={handleOnSave} task={task} />;
   }
 
   return (
