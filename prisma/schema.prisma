@@ -19,6 +19,8 @@ datasource db {
 
 model Task {
   id          String   @id @default(uuid())
+  user        User     @relation(fields: [userId], references: [id])
+  userId      String   @map("user_id")
   title       String
   description String?
   isCompleted Boolean  @default(false) @map("is_completed")
@@ -26,4 +28,21 @@ model Task {
   updatedAt   DateTime @updatedAt @map("updated_at")
 
   @@map("task")
+}
+
+model User {
+  id                   String    @id @default(uuid())
+  email                String    @unique
+  password             String
+  firstName            String    @map("first_name")
+  lastName             String    @map("last_name")
+  hasVerifiedEmail     Boolean   @default(false) @map("has_verified_email")
+  hashToVerifyEmail    String?   @unique @map("hash_to_verify_email")
+  hashToChangePassword String?   @unique @map("hash_to_change_password")
+  lastLogin            DateTime? @map("last_login")
+  createdAt            DateTime  @default(now()) @map("created_at")
+  updatedAt            DateTime  @default(now()) @updatedAt @map("updated_at")
+  Task                 Task[]
+
+  @@map("user")
 }

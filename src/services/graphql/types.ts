@@ -18,11 +18,28 @@ export type Scalars = {
   UUID: { input: string; output: string };
 };
 
+export type AuthRegisterInput = {
+  email: Scalars['String']['input'];
+  firstName: Scalars['String']['input'];
+  lastName: Scalars['String']['input'];
+  password: Scalars['String']['input'];
+};
+
 export type Mutation = {
   __typename?: 'Mutation';
+  authConfirmEmailByHash?: Maybe<Scalars['String']['output']>;
+  authRegister?: Maybe<Scalars['String']['output']>;
   taskCreate: TaskSingleResult;
   taskDestroy: TaskSingleResult;
   taskUpdate: TaskSingleResult;
+};
+
+export type MutationAuthConfirmEmailByHashArgs = {
+  hash: Scalars['String']['input'];
+};
+
+export type MutationAuthRegisterArgs = {
+  input: AuthRegisterInput;
 };
 
 export type MutationTaskCreateArgs = {

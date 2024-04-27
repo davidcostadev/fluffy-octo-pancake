@@ -29,6 +29,16 @@ declare global {
 }
 
 export interface NexusGenInputs {
+  AuthLoginInput: { // input type
+    email: string; // String!
+    password: string; // String!
+  }
+  AuthRegisterInput: { // input type
+    email: string; // String!
+    firstName: string; // String!
+    lastName: string; // String!
+    password: string; // String!
+  }
   TaskCreateInput: { // input type
     description?: string | null; // String
     title: string; // String!
@@ -54,6 +64,14 @@ export interface NexusGenScalars {
 }
 
 export interface NexusGenObjects {
+  AuthLoginResult: { // root type
+    token: string; // String!
+    user: NexusGenRootTypes['User']; // User!
+  }
+  AuthSessionUpdateResult: { // root type
+    token: string; // String!
+    user: NexusGenRootTypes['UserSingleResult']; // UserSingleResult!
+  }
   Mutation: {};
   Query: {};
   Task: { // root type
@@ -70,6 +88,18 @@ export interface NexusGenObjects {
   TaskSingleResult: { // root type
     data?: NexusGenRootTypes['Task'] | null; // Task
   }
+  User: { // root type
+    createdAt: NexusGenScalars['DateTime']; // DateTime!
+    email: string; // String!
+    firstName: string; // String!
+    id: NexusGenScalars['UUID']; // UUID!
+    lastLogin?: NexusGenScalars['DateTime'] | null; // DateTime
+    lastName: string; // String!
+    updatedAt: NexusGenScalars['DateTime']; // DateTime!
+  }
+  UserSingleResult: { // root type
+    data?: NexusGenRootTypes['User'] | null; // User
+  }
 }
 
 export interface NexusGenInterfaces {
@@ -83,7 +113,22 @@ export type NexusGenRootTypes = NexusGenObjects
 export type NexusGenAllTypes = NexusGenRootTypes & NexusGenScalars
 
 export interface NexusGenFieldTypes {
+  AuthLoginResult: { // field return type
+    token: string; // String!
+    user: NexusGenRootTypes['User']; // User!
+  }
+  AuthSessionUpdateResult: { // field return type
+    token: string; // String!
+    user: NexusGenRootTypes['UserSingleResult']; // UserSingleResult!
+  }
   Mutation: { // field return type
+    authChangePasswordByHash: string | null; // String
+    authConfirmEmailByHash: string | null; // String
+    authLogin: NexusGenRootTypes['AuthLoginResult'] | null; // AuthLoginResult
+    authLogout: string | null; // String
+    authRegister: string | null; // String
+    authRequestChangePassword: string | null; // String
+    authSessionUpdate: NexusGenRootTypes['AuthSessionUpdateResult'] | null; // AuthSessionUpdateResult
     taskCreate: NexusGenRootTypes['TaskSingleResult']; // TaskSingleResult!
     taskDestroy: NexusGenRootTypes['TaskSingleResult']; // TaskSingleResult!
     taskUpdate: NexusGenRootTypes['TaskSingleResult']; // TaskSingleResult!
@@ -105,10 +150,37 @@ export interface NexusGenFieldTypes {
   TaskSingleResult: { // field return type
     data: NexusGenRootTypes['Task'] | null; // Task
   }
+  User: { // field return type
+    createdAt: NexusGenScalars['DateTime']; // DateTime!
+    email: string; // String!
+    firstName: string; // String!
+    id: NexusGenScalars['UUID']; // UUID!
+    lastLogin: NexusGenScalars['DateTime'] | null; // DateTime
+    lastName: string; // String!
+    updatedAt: NexusGenScalars['DateTime']; // DateTime!
+  }
+  UserSingleResult: { // field return type
+    data: NexusGenRootTypes['User'] | null; // User
+  }
 }
 
 export interface NexusGenFieldTypeNames {
+  AuthLoginResult: { // field return type name
+    token: 'String'
+    user: 'User'
+  }
+  AuthSessionUpdateResult: { // field return type name
+    token: 'String'
+    user: 'UserSingleResult'
+  }
   Mutation: { // field return type name
+    authChangePasswordByHash: 'String'
+    authConfirmEmailByHash: 'String'
+    authLogin: 'AuthLoginResult'
+    authLogout: 'String'
+    authRegister: 'String'
+    authRequestChangePassword: 'String'
+    authSessionUpdate: 'AuthSessionUpdateResult'
     taskCreate: 'TaskSingleResult'
     taskDestroy: 'TaskSingleResult'
     taskUpdate: 'TaskSingleResult'
@@ -130,10 +202,38 @@ export interface NexusGenFieldTypeNames {
   TaskSingleResult: { // field return type name
     data: 'Task'
   }
+  User: { // field return type name
+    createdAt: 'DateTime'
+    email: 'String'
+    firstName: 'String'
+    id: 'UUID'
+    lastLogin: 'DateTime'
+    lastName: 'String'
+    updatedAt: 'DateTime'
+  }
+  UserSingleResult: { // field return type name
+    data: 'User'
+  }
 }
 
 export interface NexusGenArgTypes {
   Mutation: {
+    authChangePasswordByHash: { // args
+      hash: string; // String!
+      password: string; // String!
+    }
+    authConfirmEmailByHash: { // args
+      hash: string; // String!
+    }
+    authLogin: { // args
+      input: NexusGenInputs['AuthLoginInput']; // AuthLoginInput!
+    }
+    authRegister: { // args
+      input: NexusGenInputs['AuthRegisterInput']; // AuthRegisterInput!
+    }
+    authRequestChangePassword: { // args
+      email: string; // String!
+    }
     taskCreate: { // args
       input: NexusGenInputs['TaskCreateInput']; // TaskCreateInput!
     }
