@@ -18,7 +18,6 @@ interface Token {
 export async function getUserId(context: Context): Promise<User> {
   const session = await getIronSession<SessionData>(cookies(), sessionOptions);
   const authorization = context.req.headers.get('Authorization');
-  console.log(authorization);
 
   let accessToken: string | null = null;
 
