@@ -39,9 +39,23 @@ export interface NexusGenInputs {
     lastName: string; // String!
     password: string; // String!
   }
+  BoolFilter: { // input type
+    equals?: boolean | null; // Boolean
+  }
+  PaginationInput: { // input type
+    limit?: number | null; // Int
+    page?: number | null; // Int
+  }
   TaskCreateInput: { // input type
     description?: string | null; // String
     title: string; // String!
+  }
+  TaskFilter: { // input type
+    isCompleted?: NexusGenInputs['BoolFilter'] | null; // BoolFilter
+  }
+  TaskSorting: { // input type
+    createdAt?: NexusGenEnums['SortingOrder'] | null; // SortingOrder
+    updatedAt?: NexusGenEnums['SortingOrder'] | null; // SortingOrder
   }
   TaskUpdateInput: { // input type
     description?: string | null; // String
@@ -51,6 +65,7 @@ export interface NexusGenInputs {
 }
 
 export interface NexusGenEnums {
+  SortingOrder: "asc" | "desc"
 }
 
 export interface NexusGenScalars {
@@ -110,7 +125,7 @@ export interface NexusGenUnions {
 
 export type NexusGenRootTypes = NexusGenObjects
 
-export type NexusGenAllTypes = NexusGenRootTypes & NexusGenScalars
+export type NexusGenAllTypes = NexusGenRootTypes & NexusGenScalars & NexusGenEnums
 
 export interface NexusGenFieldTypes {
   AuthLoginResult: { // field return type
@@ -245,6 +260,13 @@ export interface NexusGenArgTypes {
       taskId: NexusGenScalars['UUID']; // UUID!
     }
   }
+  Query: {
+    tasks: { // args
+      filter?: NexusGenInputs['TaskFilter'] | null; // TaskFilter
+      pagination?: NexusGenInputs['PaginationInput'] | null; // PaginationInput
+      sorting?: NexusGenInputs['TaskSorting'] | null; // TaskSorting
+    }
+  }
 }
 
 export interface NexusGenAbstractTypeMembers {
@@ -257,7 +279,7 @@ export type NexusGenObjectNames = keyof NexusGenObjects;
 
 export type NexusGenInputNames = keyof NexusGenInputs;
 
-export type NexusGenEnumNames = never;
+export type NexusGenEnumNames = keyof NexusGenEnums;
 
 export type NexusGenInterfaceNames = never;
 

@@ -17,16 +17,18 @@ interface Token {
 
 export async function getUserId(context: Context): Promise<User> {
   const session = await getIronSession<SessionData>(cookies(), sessionOptions);
+  const authorization = context.req.headers.get('Authorization');
+  console.log(authorization);
 
   let accessToken: string | null = null;
 
   if (session.token) {
     accessToken = session.token;
+  } else if (authorization) {
+    accessToken = authorization.replace('Bearer ', '');
   }
-  // const Authorization = context.req.headers.authorization;
 
   if (accessToken) {
-    // const token = Authorization.replace('Bearer ', '');
     const verifiedToken = verify(accessToken, APP_SECRET) as Token;
 
     const userId = verifiedToken && verifiedToken.userId;
