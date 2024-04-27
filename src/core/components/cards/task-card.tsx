@@ -42,7 +42,7 @@ export const TaskCard = ({ task }: TaskCardProps) => {
       }
     } catch (error) {
       console.error(error);
-      toast.error(`${error}`);
+      toast.error(error instanceof Error ? error.message : `${error}`);
     }
   };
 
@@ -69,7 +69,7 @@ export const TaskCard = ({ task }: TaskCardProps) => {
       }
     } catch (error) {
       console.error(error);
-      toast.error(`${error}`);
+      toast.error(error instanceof Error ? error.message : `${error}`);
     }
   };
 

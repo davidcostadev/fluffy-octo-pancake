@@ -49,7 +49,7 @@ export const TaskAddForm = ({ onCancel, onSave }: TaskAddFormProps) => {
       }
     } catch (error) {
       console.error(error);
-      toast.error(`${error}`);
+      toast.error(error instanceof Error ? error.message : `${error}`);
     }
   };
 

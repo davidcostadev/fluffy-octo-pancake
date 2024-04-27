@@ -35,7 +35,6 @@ export const LoginForm = () => {
 
   const onSubmit = async (values: z.infer<typeof LoginSchema>) => {
     try {
-      console.log(values);
       const { data } = await login({
         variables: {
           input: values,
@@ -52,7 +51,7 @@ export const LoginForm = () => {
       }
     } catch (error) {
       console.error(error);
-      toast.error(`${error}`);
+      toast.error(error instanceof Error ? error.message : `${error}`);
     }
   };
   console.log(errors);

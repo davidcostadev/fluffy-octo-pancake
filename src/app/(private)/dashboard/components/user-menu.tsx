@@ -35,7 +35,7 @@ export const UserMenu = ({ user }: UserMenuProps) => {
       }
     } catch (error) {
       console.error(error);
-      toast.error(`${error}`);
+      toast.error(error instanceof Error ? error.message : `${error}`);
     }
   };
 
