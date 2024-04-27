@@ -99,7 +99,10 @@ export const RegisterForm = () => {
         disabled={formLoading}
       />
       <div className="flex items-center justify-between py-4">
-        <Link href="/auth/login">Login here</Link>
+        <div>
+          <div className="text-sm">Do you already have an account?</div>
+          <Link href="/auth/login">Login here</Link>
+        </div>
 
         <Button type="submit" variant="success" disabled={formLoading}>
           {formLoading ? (
