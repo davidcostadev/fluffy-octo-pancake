@@ -1,4 +1,8 @@
+import { ValidationError } from 'apollo-server-errors';
 import { arg, mutationField, nonNull } from 'nexus';
+
+import { getUserId } from 'graphql/utils/auth-helpers';
+import lang from 'lang';
 
 export const TaskUpdateMutation = mutationField('taskUpdate', {
   type: nonNull('TaskSingleResult'),
@@ -11,6 +15,8 @@ export const TaskUpdateMutation = mutationField('taskUpdate', {
     ),
   },
   resolve: async (parent, { taskId, input }, ctx) => {
+    const user = await getUserId(ctx);
+
     const task = await ctx.prisma.task.findUnique({
       where: {
         id: taskId,
@@ -18,7 +24,11 @@ export const TaskUpdateMutation = mutationField('taskUpdate', {
     });
 
     if (!task) {
-      throw new Error(`Task not found`);
+      throw new ValidationError(lang.task.not_found);
+    }
+
+    if (task.userId !== user.id) {
+      throw new ValidationError(lang.permission.action_not_allowed);
     }
 
     const data = await ctx.prisma.task.update({

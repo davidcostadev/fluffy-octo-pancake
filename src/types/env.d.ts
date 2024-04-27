@@ -14,5 +14,6 @@ declare namespace NodeJS {
     EMAIL_FROM: string;
     ENABLE_SEND_EMAIL: string;
     ENABLE_ONLY_VERIFIED_EMAILS_TO_LOGIN: string;
+    SESSION_KEY: string;
   }
 }

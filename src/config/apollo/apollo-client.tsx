@@ -5,8 +5,7 @@ import { NextSSRApolloClient, NextSSRInMemoryCache } from '@apollo/experimental-
 
 // import { getIronSession } from 'iron-session';
 // import { cookies } from 'next/headers';
-
-// import { SessionData, sessionOptions } from 'app/lib-session';
+// import { SessionData, sessionOptions } from 'services/session/session-options';
 
 const authLink = setContext(async (_, context) => {
   // const session = await getIronSession<SessionData>(cookies(), sessionOptions);

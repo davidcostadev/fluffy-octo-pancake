@@ -29,7 +29,7 @@ export const TaskAddForm = ({ onCancel, onSave }: TaskAddFormProps) => {
   const {
     handleSubmit,
     control,
-    formState: { isSubmitting },
+    formState: { errors, isSubmitting },
   } = form;
 
   const onSubmit = async (data: z.infer<typeof TaskAddSchema>) => {
@@ -60,13 +60,22 @@ export const TaskAddForm = ({ onCancel, onSave }: TaskAddFormProps) => {
     >
       <InputControlled
         type="text"
+        variant="ghost"
         name="title"
         control={control}
+        errors={errors}
         placeholder="task name"
         autoFocus
         disabled={isSubmitting}
       />
-      <TextareaControlled name="description" control={control} placeholder="description" disabled={isSubmitting} />
+
+      <TextareaControlled
+        name="description"
+        control={control}
+        placeholder="description"
+        disabled={isSubmitting}
+        variant="ghost"
+      />
       <div className="flex justify-end gap-2">
         <Button type="button" variant="default" onClick={onCancel} disabled={isSubmitting}>
           Cancel

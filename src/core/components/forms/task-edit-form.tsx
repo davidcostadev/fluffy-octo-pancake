@@ -32,7 +32,7 @@ export const TaskEditForm = ({ onCancel, onSave, task }: TaskEditFormProps) => {
   const {
     handleSubmit,
     control,
-    formState: { isSubmitting },
+    formState: { errors, isSubmitting },
   } = form;
 
   const onSubmit = async (values: z.infer<typeof TaskEditSchema>) => {
@@ -65,12 +65,21 @@ export const TaskEditForm = ({ onCancel, onSave, task }: TaskEditFormProps) => {
       <InputControlled
         type="text"
         name="title"
+        variant="ghost"
         control={control}
+        errors={errors}
         placeholder="task name"
         autoFocus
         disabled={isSubmitting}
       />
-      <TextareaControlled name="description" control={control} placeholder="description" disabled={isSubmitting} />
+
+      <TextareaControlled
+        name="description"
+        control={control}
+        placeholder="description"
+        disabled={isSubmitting}
+        variant="ghost"
+      />
       <div className="flex justify-end gap-2">
         <Button type="button" variant="default" onClick={onCancel} disabled={isSubmitting}>
           Cancel

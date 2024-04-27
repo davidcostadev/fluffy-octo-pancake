@@ -15,6 +15,17 @@ const enUs = {
     error_email_has_not_been_confirmed: 'Email has not been confirmed',
     error_email_or_password_invalid: 'Email or password invalid',
   },
+  authentication: {
+    user_invalid: 'User invalid',
+    token_invalid: 'Token invalid',
+    session_invalid: 'Session invalid',
+  },
+  task: {
+    not_found: 'Task not found',
+  },
+  permission: {
+    action_not_allowed: 'Action not allowed',
+  },
 };
 
 export default enUs;

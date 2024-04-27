@@ -1,9 +1,12 @@
 import { User } from '@prisma/client';
 import { AuthenticationError } from 'apollo-server-errors';
+import { getIronSession } from 'iron-session';
 import { verify } from 'jsonwebtoken';
-import lang from 'lang';
+import { cookies } from 'next/headers';
 
 import { Context } from 'graphql/context';
+import lang from 'lang';
+import { SessionData, sessionOptions } from 'services/session/session-options';
 
 const { SECRET_KEY } = process.env;
 export const APP_SECRET = SECRET_KEY || 'secret';
@@ -13,11 +16,18 @@ interface Token {
 }
 
 export async function getUserId(context: Context): Promise<User> {
-  const Authorization = context.req.headers.authorization;
+  const session = await getIronSession<SessionData>(cookies(), sessionOptions);
 
-  if (Authorization) {
-    const token = Authorization.replace('Bearer ', '');
-    const verifiedToken = verify(token, APP_SECRET) as Token;
+  let accessToken: string | null = null;
+
+  if (session.token) {
+    accessToken = session.token;
+  }
+  // const Authorization = context.req.headers.authorization;
+
+  if (accessToken) {
+    // const token = Authorization.replace('Bearer ', '');
+    const verifiedToken = verify(accessToken, APP_SECRET) as Token;
 
     const userId = verifiedToken && verifiedToken.userId;
     if (userId) {
@@ -30,5 +40,5 @@ export async function getUserId(context: Context): Promise<User> {
       throw new AuthenticationError(lang.authentication.token_invalid);
     }
   }
-  throw new AuthenticationError(lang.authentication.header_invalid);
+  throw new AuthenticationError(lang.authentication.session_invalid);
 }

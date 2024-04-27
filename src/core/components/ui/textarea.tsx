@@ -7,6 +7,8 @@ const inputVariants = cva(
       variant: {
         default:
           'hover:border-slate-100 focus:border-slate-300  focus:ring-slate-200 disabled:bg-gray-100 disabled:border-gray-100 ',
+        ghost:
+          'hover:border-slate-100 focus:border-slate-300  focus:ring-slate-200 disabled:bg-gray-100 disabled:border-gray-100 ',
         error: 'border-red-500 focus:border-red-500 focus:ring-red-500 text-red-800',
       },
       size: {

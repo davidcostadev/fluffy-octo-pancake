@@ -18,6 +18,17 @@ export type Scalars = {
   UUID: { input: string; output: string };
 };
 
+export type AuthLoginInput = {
+  email: Scalars['String']['input'];
+  password: Scalars['String']['input'];
+};
+
+export type AuthLoginResult = {
+  __typename?: 'AuthLoginResult';
+  token: Scalars['String']['output'];
+  user: User;
+};
+
 export type AuthRegisterInput = {
   email: Scalars['String']['input'];
   firstName: Scalars['String']['input'];
@@ -25,21 +36,45 @@ export type AuthRegisterInput = {
   password: Scalars['String']['input'];
 };
 
+export type AuthSessionUpdateResult = {
+  __typename?: 'AuthSessionUpdateResult';
+  token: Scalars['String']['output'];
+  user: UserSingleResult;
+};
+
 export type Mutation = {
   __typename?: 'Mutation';
+  authChangePasswordByHash?: Maybe<Scalars['String']['output']>;
   authConfirmEmailByHash?: Maybe<Scalars['String']['output']>;
+  authLogin?: Maybe<AuthLoginResult>;
+  authLogout?: Maybe<Scalars['String']['output']>;
   authRegister?: Maybe<Scalars['String']['output']>;
+  authRequestChangePassword?: Maybe<Scalars['String']['output']>;
+  authSessionUpdate?: Maybe<AuthSessionUpdateResult>;
   taskCreate: TaskSingleResult;
   taskDestroy: TaskSingleResult;
   taskUpdate: TaskSingleResult;
+};
+
+export type MutationAuthChangePasswordByHashArgs = {
+  hash: Scalars['String']['input'];
+  password: Scalars['String']['input'];
 };
 
 export type MutationAuthConfirmEmailByHashArgs = {
   hash: Scalars['String']['input'];
 };
 
+export type MutationAuthLoginArgs = {
+  input: AuthLoginInput;
+};
+
 export type MutationAuthRegisterArgs = {
   input: AuthRegisterInput;
+};
+
+export type MutationAuthRequestChangePasswordArgs = {
+  email: Scalars['String']['input'];
 };
 
 export type MutationTaskCreateArgs = {
@@ -89,6 +124,44 @@ export type TaskUpdateInput = {
   description?: InputMaybe<Scalars['String']['input']>;
   isCompleted?: InputMaybe<Scalars['Boolean']['input']>;
   title?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type User = {
+  __typename?: 'User';
+  createdAt: Scalars['DateTime']['output'];
+  email: Scalars['String']['output'];
+  firstName: Scalars['String']['output'];
+  id: Scalars['UUID']['output'];
+  lastLogin?: Maybe<Scalars['DateTime']['output']>;
+  lastName: Scalars['String']['output'];
+  updatedAt: Scalars['DateTime']['output'];
+};
+
+export type UserSingleResult = {
+  __typename?: 'UserSingleResult';
+  data?: Maybe<User>;
+};
+
+export type AuthLoginMutationVariables = Exact<{
+  input: AuthLoginInput;
+}>;
+
+export type AuthLoginMutation = {
+  __typename?: 'Mutation';
+  authLogin?: {
+    __typename?: 'AuthLoginResult';
+    token: string;
+    user: {
+      __typename?: 'User';
+      createdAt: string;
+      email: string;
+      firstName: string;
+      id: string;
+      lastLogin?: string | null;
+      lastName: string;
+      updatedAt: string;
+    };
+  } | null;
 };
 
 export type TaskFragment = {
