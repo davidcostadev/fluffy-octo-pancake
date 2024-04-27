@@ -1,4 +1,5 @@
 import { type VariantProps, cva } from 'class-variance-authority';
+import Link from 'next/link';
 
 const buttonVariants = cva(
   'inline-flex items-center rounded-lg gap-2 disabled:opacity-50 disabled:cursor-not-allowed',
@@ -25,8 +26,18 @@ const buttonVariants = cva(
   },
 );
 
-interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement>, VariantProps<typeof buttonVariants> {}
+interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement>, VariantProps<typeof buttonVariants> {
+  href?: string;
+}
 
-export const Button = ({ variant, size, className, ...props }: ButtonProps) => {
+export const Button = ({ variant, size, className, href, ...props }: ButtonProps) => {
+  if (href) {
+    return (
+      <Link href={href}>
+        <button className={buttonVariants({ variant, size, className })} {...props} />
+      </Link>
+    );
+  }
+
   return <button className={buttonVariants({ variant, size, className })} {...props} />;
 };
