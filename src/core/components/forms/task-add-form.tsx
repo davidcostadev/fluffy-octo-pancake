@@ -38,7 +38,7 @@ export const TaskAddForm = ({ onCancel, onSave }: TaskAddFormProps) => {
         variables: {
           input: data,
         },
-        refetchQueries: ['Tasks'],
+        refetchQueries: ['TasksPending'],
       });
 
       if (task?.taskCreate.data?.id) {
@@ -72,9 +72,11 @@ export const TaskAddForm = ({ onCancel, onSave }: TaskAddFormProps) => {
       <TextareaControlled
         name="description"
         control={control}
+        errors={errors}
         placeholder="description"
         disabled={isSubmitting}
         variant="ghost"
+        maxLength={255}
       />
       <div className="flex justify-end gap-2">
         <Button type="button" variant="default" onClick={onCancel} disabled={isSubmitting}>

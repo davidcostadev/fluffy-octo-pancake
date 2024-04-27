@@ -28,8 +28,17 @@ interface TextareaVariantProps extends VariantProps<typeof inputVariants> {
 
 interface TextareaAttributes extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {}
 
-export type TextareaProps = TextareaVariantProps & Omit<TextareaAttributes, 'size'>;
+export type TextareaBaseProps = TextareaVariantProps & Omit<TextareaAttributes, 'size'>;
 
-export const Textarea = ({ variant, size, className, textareaRef, ...props }: TextareaProps) => {
-  return <textarea className={inputVariants({ variant, size, className })} {...props} ref={textareaRef} />;
+export type TextareaProps = TextareaBaseProps & {
+  errorMessage?: string;
+};
+
+export const Textarea = ({ variant, size, className, textareaRef, errorMessage, ...props }: TextareaProps) => {
+  return (
+    <>
+      <textarea className={inputVariants({ variant, size, className })} {...props} ref={textareaRef} />
+      {!!errorMessage && <p className="text-xs text-red-500/50">{errorMessage}</p>}
+    </>
+  );
 };

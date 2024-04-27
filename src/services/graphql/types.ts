@@ -42,6 +42,10 @@ export type AuthSessionUpdateResult = {
   user: UserSingleResult;
 };
 
+export type BoolFilter = {
+  equals?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
 export type Mutation = {
   __typename?: 'Mutation';
   authChangePasswordByHash?: Maybe<Scalars['String']['output']>;
@@ -90,10 +94,26 @@ export type MutationTaskUpdateArgs = {
   taskId: Scalars['UUID']['input'];
 };
 
+export type PaginationInput = {
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  page?: InputMaybe<Scalars['Int']['input']>;
+};
+
 export type Query = {
   __typename?: 'Query';
   tasks?: Maybe<TaskListResult>;
 };
+
+export type QueryTasksArgs = {
+  filter?: InputMaybe<TaskFilter>;
+  pagination?: InputMaybe<PaginationInput>;
+  sorting?: InputMaybe<TaskSorting>;
+};
+
+export enum SortingOrder {
+  Asc = 'ASC',
+  Desc = 'DESC',
+}
 
 export type Task = {
   __typename?: 'Task';
@@ -110,6 +130,10 @@ export type TaskCreateInput = {
   title: Scalars['String']['input'];
 };
 
+export type TaskFilter = {
+  isCompleted?: InputMaybe<BoolFilter>;
+};
+
 export type TaskListResult = {
   __typename?: 'TaskListResult';
   data?: Maybe<Array<Task>>;
@@ -118,6 +142,11 @@ export type TaskListResult = {
 export type TaskSingleResult = {
   __typename?: 'TaskSingleResult';
   data?: Maybe<Task>;
+};
+
+export type TaskSorting = {
+  createdAt?: InputMaybe<SortingOrder>;
+  updatedAt?: InputMaybe<SortingOrder>;
 };
 
 export type TaskUpdateInput = {
@@ -184,9 +213,31 @@ export type TaskFragment = {
   updatedAt: string;
 };
 
-export type TasksQueryVariables = Exact<{ [key: string]: never }>;
+export type TasksPendingQueryVariables = Exact<{
+  pagination: PaginationInput;
+}>;
 
-export type TasksQuery = {
+export type TasksPendingQuery = {
+  __typename?: 'Query';
+  tasks?: {
+    __typename?: 'TaskListResult';
+    data?: Array<{
+      __typename?: 'Task';
+      isCompleted: boolean;
+      description?: string | null;
+      id: string;
+      title: string;
+      createdAt: string;
+      updatedAt: string;
+    }> | null;
+  } | null;
+};
+
+export type TasksCompletedQueryVariables = Exact<{
+  pagination: PaginationInput;
+}>;
+
+export type TasksCompletedQuery = {
   __typename?: 'Query';
   tasks?: {
     __typename?: 'TaskListResult';

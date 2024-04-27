@@ -32,7 +32,7 @@ export const TaskCard = ({ task }: TaskCardProps) => {
         variables: {
           taskId: task.id,
         },
-        refetchQueries: ['Tasks'],
+        refetchQueries: [task.isCompleted ? 'TasksCompleted' : 'TasksPending'],
       });
 
       if (data?.taskDestroy.data?.id) {
@@ -59,7 +59,7 @@ export const TaskCard = ({ task }: TaskCardProps) => {
             isCompleted: !task.isCompleted,
           },
         },
-        refetchQueries: ['Tasks'],
+        refetchQueries: ['TasksCompleted', 'TasksPending'],
       });
 
       if (data?.taskUpdate.data) {
@@ -79,9 +79,10 @@ export const TaskCard = ({ task }: TaskCardProps) => {
 
   return (
     <div
-      className={clsx('group flex gap-4 rounded-lg border-b border-slate-300 px-2 py-3 ', {
-        'bg-gray-50': task.isCompleted,
-        'hover:bg-gray-50': !task.isCompleted,
+      className={clsx('group flex gap-4 rounded-lg  border-b px-2 py-3', {
+        'border-transparent bg-transparent bg-opacity-50 hover:border-slate-300/50 hover:bg-slate-50/50':
+          task.isCompleted,
+        'border-slate-300 hover:bg-gray-50': !task.isCompleted,
       })}
     >
       <button
@@ -93,8 +94,22 @@ export const TaskCard = ({ task }: TaskCardProps) => {
         {task.isCompleted ? <CircleCheck size={20} /> : <Circle size={20} />}
       </button>
       <div className="flex flex-1 flex-col gap-2">
-        <h4 className="text-sm font-semibold">{task.title}</h4>
-        <p className="min-h-5 text-sm text-slate-900/50">{task.description}</p>
+        <h4
+          className={clsx('text-sm font-semibold text-slate-900', {
+            'text-opacity-50 line-through': task.isCompleted,
+            '': !task.isCompleted,
+          })}
+        >
+          {task.title}
+        </h4>
+        <p
+          className={clsx('min-h-5 text-sm text-slate-900', {
+            'text-opacity-20 line-through': task.isCompleted,
+            'text-opacity-50': !task.isCompleted,
+          })}
+        >
+          {task.description}
+        </p>
       </div>
       <div className="flex gap-1 opacity-0 transition-opacity group-hover:opacity-100">
         <Button type="button" variant="ghost" size="icon" onClick={handleEditFormVisibility}>

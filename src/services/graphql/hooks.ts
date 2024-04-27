@@ -138,9 +138,9 @@ export type AuthRegisterMutationOptions = Apollo.BaseMutationOptions<
   Types.AuthRegisterMutation,
   Types.AuthRegisterMutationVariables
 >;
-export const TasksDocument = gql`
-  query Tasks {
-    tasks {
+export const TasksPendingDocument = gql`
+  query TasksPending($pagination: PaginationInput!) {
+    tasks(filter: { isCompleted: { equals: false } }, sorting: { createdAt: ASC }, pagination: $pagination) {
       data {
         ...Task
       }
@@ -150,40 +150,109 @@ export const TasksDocument = gql`
 `;
 
 /**
- * __useTasksQuery__
+ * __useTasksPendingQuery__
  *
- * To run a query within a React component, call `useTasksQuery` and pass it any options that fit your needs.
- * When your component renders, `useTasksQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * To run a query within a React component, call `useTasksPendingQuery` and pass it any options that fit your needs.
+ * When your component renders, `useTasksPendingQuery` returns an object from Apollo Client that contains loading, error, and data properties
  * you can use to render your UI.
  *
  * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
  *
  * @example
- * const { data, loading, error } = useTasksQuery({
+ * const { data, loading, error } = useTasksPendingQuery({
  *   variables: {
+ *      pagination: // value for 'pagination'
  *   },
  * });
  */
-export function useTasksQuery(baseOptions?: Apollo.QueryHookOptions<Types.TasksQuery, Types.TasksQueryVariables>) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useQuery<Types.TasksQuery, Types.TasksQueryVariables>(TasksDocument, options);
-}
-export function useTasksLazyQuery(
-  baseOptions?: Apollo.LazyQueryHookOptions<Types.TasksQuery, Types.TasksQueryVariables>,
+export function useTasksPendingQuery(
+  baseOptions: Apollo.QueryHookOptions<Types.TasksPendingQuery, Types.TasksPendingQueryVariables> &
+    ({ variables: Types.TasksPendingQueryVariables; skip?: boolean } | { skip: boolean }),
 ) {
   const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useLazyQuery<Types.TasksQuery, Types.TasksQueryVariables>(TasksDocument, options);
+  return Apollo.useQuery<Types.TasksPendingQuery, Types.TasksPendingQueryVariables>(TasksPendingDocument, options);
 }
-export function useTasksSuspenseQuery(
-  baseOptions?: Apollo.SuspenseQueryHookOptions<Types.TasksQuery, Types.TasksQueryVariables>,
+export function useTasksPendingLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<Types.TasksPendingQuery, Types.TasksPendingQueryVariables>,
 ) {
   const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useSuspenseQuery<Types.TasksQuery, Types.TasksQueryVariables>(TasksDocument, options);
+  return Apollo.useLazyQuery<Types.TasksPendingQuery, Types.TasksPendingQueryVariables>(TasksPendingDocument, options);
 }
-export type TasksQueryHookResult = ReturnType<typeof useTasksQuery>;
-export type TasksLazyQueryHookResult = ReturnType<typeof useTasksLazyQuery>;
-export type TasksSuspenseQueryHookResult = ReturnType<typeof useTasksSuspenseQuery>;
-export type TasksQueryResult = Apollo.QueryResult<Types.TasksQuery, Types.TasksQueryVariables>;
+export function useTasksPendingSuspenseQuery(
+  baseOptions?: Apollo.SuspenseQueryHookOptions<Types.TasksPendingQuery, Types.TasksPendingQueryVariables>,
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useSuspenseQuery<Types.TasksPendingQuery, Types.TasksPendingQueryVariables>(
+    TasksPendingDocument,
+    options,
+  );
+}
+export type TasksPendingQueryHookResult = ReturnType<typeof useTasksPendingQuery>;
+export type TasksPendingLazyQueryHookResult = ReturnType<typeof useTasksPendingLazyQuery>;
+export type TasksPendingSuspenseQueryHookResult = ReturnType<typeof useTasksPendingSuspenseQuery>;
+export type TasksPendingQueryResult = Apollo.QueryResult<Types.TasksPendingQuery, Types.TasksPendingQueryVariables>;
+export const TasksCompletedDocument = gql`
+  query TasksCompleted($pagination: PaginationInput!) {
+    tasks(filter: { isCompleted: { equals: true } }, sorting: { updatedAt: DESC }, pagination: $pagination) {
+      data {
+        ...Task
+      }
+    }
+  }
+  ${TaskFragmentDoc}
+`;
+
+/**
+ * __useTasksCompletedQuery__
+ *
+ * To run a query within a React component, call `useTasksCompletedQuery` and pass it any options that fit your needs.
+ * When your component renders, `useTasksCompletedQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useTasksCompletedQuery({
+ *   variables: {
+ *      pagination: // value for 'pagination'
+ *   },
+ * });
+ */
+export function useTasksCompletedQuery(
+  baseOptions: Apollo.QueryHookOptions<Types.TasksCompletedQuery, Types.TasksCompletedQueryVariables> &
+    ({ variables: Types.TasksCompletedQueryVariables; skip?: boolean } | { skip: boolean }),
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useQuery<Types.TasksCompletedQuery, Types.TasksCompletedQueryVariables>(
+    TasksCompletedDocument,
+    options,
+  );
+}
+export function useTasksCompletedLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<Types.TasksCompletedQuery, Types.TasksCompletedQueryVariables>,
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useLazyQuery<Types.TasksCompletedQuery, Types.TasksCompletedQueryVariables>(
+    TasksCompletedDocument,
+    options,
+  );
+}
+export function useTasksCompletedSuspenseQuery(
+  baseOptions?: Apollo.SuspenseQueryHookOptions<Types.TasksCompletedQuery, Types.TasksCompletedQueryVariables>,
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useSuspenseQuery<Types.TasksCompletedQuery, Types.TasksCompletedQueryVariables>(
+    TasksCompletedDocument,
+    options,
+  );
+}
+export type TasksCompletedQueryHookResult = ReturnType<typeof useTasksCompletedQuery>;
+export type TasksCompletedLazyQueryHookResult = ReturnType<typeof useTasksCompletedLazyQuery>;
+export type TasksCompletedSuspenseQueryHookResult = ReturnType<typeof useTasksCompletedSuspenseQuery>;
+export type TasksCompletedQueryResult = Apollo.QueryResult<
+  Types.TasksCompletedQuery,
+  Types.TasksCompletedQueryVariables
+>;
 export const TaskCreateDocument = gql`
   mutation TaskCreate($input: TaskCreateInput!) {
     taskCreate(input: $input) {

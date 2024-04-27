@@ -3,10 +3,20 @@
 import { ErrorAlert } from 'core/components/cards/error-alert';
 import { TaskCard } from 'core/components/cards/task-card';
 import { TasksLoading } from 'core/components/loading-placeholders/tasks-loading';
-import { useTasksQuery } from 'services/graphql/hooks';
+import { useTasksPendingQuery } from 'services/graphql/hooks';
 
-export const TaskList = () => {
-  const { data, error, loading } = useTasksQuery();
+export const TaskPendingList = () => {
+  const page = 1;
+  const limit = 25;
+
+  const { data, error, loading } = useTasksPendingQuery({
+    variables: {
+      pagination: {
+        page,
+        limit,
+      },
+    },
+  });
 
   const amountOfTasks = data?.tasks?.data?.length ?? 0;
 
@@ -42,5 +52,3 @@ export const TaskList = () => {
     </>
   );
 };
-
-export default TaskList;

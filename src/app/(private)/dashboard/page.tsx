@@ -1,5 +1,6 @@
 import { TaskAdd } from 'app/components/task-add';
-import { TaskList } from 'app/components/task-list';
+import { TaskCompletedList } from 'app/components/task-completed-list';
+import { TaskPendingList } from 'app/components/task-pending-list';
 import { HeaderBrand } from 'core/components/ui/header-brand';
 import { getSession } from 'services/session/get-session';
 
@@ -20,8 +21,9 @@ export default async function Home() {
           <UserMenu user={user} />
         </div>
       </header>
-      <TaskList />
+      <TaskPendingList />
       <TaskAdd />
+      <TaskCompletedList />
     </main>
   );
 }

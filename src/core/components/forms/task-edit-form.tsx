@@ -76,9 +76,11 @@ export const TaskEditForm = ({ onCancel, onSave, task }: TaskEditFormProps) => {
       <TextareaControlled
         name="description"
         control={control}
+        errors={errors}
         placeholder="description"
         disabled={isSubmitting}
         variant="ghost"
+        maxLength={255}
       />
       <div className="flex justify-end gap-2">
         <Button type="button" variant="default" onClick={onCancel} disabled={isSubmitting}>

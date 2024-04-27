@@ -11,9 +11,21 @@ const TaskFragment = gql`
   }
 `;
 
-export const TASKS = gql`
-  query Tasks {
-    tasks {
+export const TASKS_PENDING = gql`
+  query TasksPending($pagination: PaginationInput!) {
+    tasks(filter: { isCompleted: { equals: false } }, sorting: { createdAt: ASC }, pagination: $pagination) {
+      data {
+        ...Task
+      }
+    }
+  }
+
+  ${TaskFragment}
+`;
+
+export const TASKS_COMPLETED = gql`
+  query TasksCompleted($pagination: PaginationInput!) {
+    tasks(filter: { isCompleted: { equals: true } }, sorting: { updatedAt: DESC }, pagination: $pagination) {
       data {
         ...Task
       }
