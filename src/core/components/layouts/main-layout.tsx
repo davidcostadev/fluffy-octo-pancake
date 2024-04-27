@@ -6,7 +6,7 @@ type MainLayoutProps = {
 
 export const MainLayout = ({ children }: MainLayoutProps) => {
   return (
-    <main className="mx-auto max-w-screen-md px-5">
+    <main className="mx-auto max-w-screen-md sm:px-5">
       <HeaderBrand isCentered={true} />
       {children}
     </main>

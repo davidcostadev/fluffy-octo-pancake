@@ -19,7 +19,7 @@ export default async function HomePage() {
         </div>
       </div>
       <div className="mx-auto max-w-screen-md px-5">
-        <div className="flex justify-center">
+        <div className="flex justify-center pb-28">
           <div className="flex gap-4 rounded-2xl px-20 py-6">
             {user ? (
               <Button href="/dashboard" variant="success">

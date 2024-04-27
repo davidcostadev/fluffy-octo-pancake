@@ -14,7 +14,7 @@ export default async function Home() {
   }
 
   return (
-    <main className="mx-auto max-w-screen-lg px-5">
+    <main className="mx-auto max-w-screen-lg px-4 sm:px-5">
       <header className="flex justify-between py-10">
         <HeaderBrand />
         <div className="flex items-center">

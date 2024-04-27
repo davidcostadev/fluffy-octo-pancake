@@ -50,7 +50,7 @@ export const UserMenu = ({ user }: UserMenuProps) => {
     <DropdownMenu options={menuOptions}>
       <Button type="button" variant="ghost">
         <Avatar firstName={user.firstName} lastName={user.lastName} />
-        <span className="ml-2">{user.firstName}</span>
+        <span className="ml-2 hidden sm:inline">{user.firstName}</span>
         <ChevronDown className="ml-2" size={14} />
       </Button>
     </DropdownMenu>

@@ -3,5 +3,5 @@ type HomeLayoutProps = {
 };
 
 export const HomeLayout = ({ children }: HomeLayoutProps) => {
-  return <main className="h-[100vh] w-full bg-gray-200">{children}</main>;
+  return <main className="min-h-[100vh] w-full bg-gray-200">{children}</main>;
 };
