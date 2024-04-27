@@ -35,7 +35,7 @@ export const DropdownMenu: React.FC<DropdownMenuProps> = ({ children, options })
             <div
               key={index}
               onClick={() => handleOptionClick(option.action)}
-              className="cursor-pointer px-4 py-2 first:rounded-t-lg last:rounded-b-lg hover:bg-gray-200 active:bg-gray-300"
+              className="cursor-pointer px-4 py-2 text-sm first:rounded-t-lg last:rounded-b-lg hover:bg-gray-200 active:bg-gray-300"
             >
               {option.label}
             </div>
