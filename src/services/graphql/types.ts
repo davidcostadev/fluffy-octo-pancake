@@ -164,6 +164,10 @@ export type AuthLoginMutation = {
   } | null;
 };
 
+export type AuthLogoutMutationVariables = Exact<{ [key: string]: never }>;
+
+export type AuthLogoutMutation = { __typename?: 'Mutation'; authLogout?: string | null };
+
 export type TaskFragment = {
   __typename?: 'Task';
   isCompleted: boolean;

@@ -2,7 +2,7 @@ import { SessionOptions } from 'iron-session';
 
 import { User } from 'services/graphql/types';
 
-type UserFromSession = Pick<User, 'createdAt' | 'email' | 'firstName' | 'id' | 'lastName' | 'updatedAt'>;
+export type UserFromSession = Pick<User, 'createdAt' | 'email' | 'firstName' | 'id' | 'lastName' | 'updatedAt'>;
 
 export interface SessionData {
   user?: UserFromSession;

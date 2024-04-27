@@ -16,3 +16,9 @@ export const AUTH_LOGIN = gql`
     }
   }
 `;
+
+export const AUTH_LOGOUT = gql`
+  mutation AuthLogout {
+    authLogout
+  }
+`;
