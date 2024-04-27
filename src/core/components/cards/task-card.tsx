@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import { Circle, CircleCheck, Edit, Trash2 } from 'lucide-react';
+import { Circle, CircleCheck, Edit, LoaderCircle, Trash2 } from 'lucide-react';
 import { useState } from 'react';
 import { toast } from 'react-hot-toast';
 
@@ -91,7 +91,13 @@ export const TaskCard = ({ task }: TaskCardProps) => {
         onClick={handleOnToggleComplete}
         disabled={isUpdating}
       >
-        {task.isCompleted ? <CircleCheck size={20} /> : <Circle size={20} />}
+        {isUpdating ? (
+          <LoaderCircle size={20} className="animate-spin" />
+        ) : task.isCompleted ? (
+          <CircleCheck size={20} />
+        ) : (
+          <Circle size={20} />
+        )}
       </button>
       <div className="flex flex-1 flex-col gap-2">
         <h4
