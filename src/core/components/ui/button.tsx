@@ -13,7 +13,7 @@ const buttonVariants = cva(
         danger: 'bg-red-400 text-white  font-semibold hover:bg-red-500 active:bg-red-500/80 disabled:bg-red-400',
       },
       size: {
-        default: 'text-sm px-4 py-2',
+        default: 'text-sm px-4 py-2.5',
         small: 'px-3 py-1 text-sm',
         icon: 'h-[36px] w-[36px] justify-center',
       },

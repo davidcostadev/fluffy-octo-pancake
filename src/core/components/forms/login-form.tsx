@@ -54,7 +54,6 @@ export const LoginForm = () => {
       toast.error(error instanceof Error ? error.message : `${error}`);
     }
   };
-  console.log(errors);
 
   const formLoading = isSubmitting || redirecting;
 
@@ -66,6 +65,7 @@ export const LoginForm = () => {
         control={control}
         errors={errors}
         name="email"
+        placeholder="Enter your email"
         disabled={formLoading}
       />
 
@@ -75,6 +75,7 @@ export const LoginForm = () => {
         control={control}
         errors={errors}
         name="password"
+        placeholder="Enter your password"
         disabled={formLoading}
       />
       <div className="flex justify-end">
