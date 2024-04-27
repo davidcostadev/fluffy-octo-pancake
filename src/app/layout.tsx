@@ -26,8 +26,8 @@ export default function RootLayout({
 }>) {
   return (
     <ApolloWrapper>
-      <html lang="en" className={`${inter.variable}`}>
-        <body className="font-inter">
+      <html lang="en" suppressHydrationWarning={true}>
+        <body className={`${inter.variable} font-inter`} suppressHydrationWarning={true}>
           <ConfirmProvider>{children}</ConfirmProvider>
           <Toaster />
         </body>
