@@ -1,14 +1,17 @@
-import { Trash2 } from 'lucide-react';
+import { LogOut, Trash2 } from 'lucide-react';
 
 import { Button } from 'core/components/ui/button';
 
+import { ConfirmIcons } from './confirm-context';
+
 interface ConfirmModalProps {
+  icon?: ConfirmIcons;
   message: string;
   onCancel: () => void;
   onConfirm: () => void;
 }
 
-export const ConfirmModal = ({ message, onCancel, onConfirm }: ConfirmModalProps): JSX.Element => {
+export const ConfirmModal = ({ icon, message, onCancel, onConfirm }: ConfirmModalProps): JSX.Element => {
   const handleOverlayClick = (): void => {
     onCancel();
   };
@@ -16,6 +19,8 @@ export const ConfirmModal = ({ message, onCancel, onConfirm }: ConfirmModalProps
   const handleModalClick = (e: React.MouseEvent<HTMLDivElement, MouseEvent>): void => {
     e.stopPropagation();
   };
+
+  const iconComponent = icon ? Icons[icon] : null;
 
   return (
     <div
@@ -30,10 +35,15 @@ export const ConfirmModal = ({ message, onCancel, onConfirm }: ConfirmModalProps
           </Button>
 
           <Button type="button" variant="danger" onClick={onConfirm}>
-            <Trash2 size="16" /> Confirm
+            {iconComponent} Confirm
           </Button>
         </div>
       </div>
     </div>
   );
+};
+
+const Icons = {
+  trash: <Trash2 size={16} />,
+  logout: <LogOut size={16} />,
 };

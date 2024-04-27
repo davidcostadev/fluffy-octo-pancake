@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 
-import { ConfirmContext } from './confirm-context';
+import { ConfirmContext, ConfirmIcons } from './confirm-context';
 import { ConfirmModal } from './confirm-modal';
 
 interface ConfirmProviderProps {
@@ -12,10 +12,12 @@ interface ConfirmProviderProps {
 export const ConfirmProvider = ({ children }: ConfirmProviderProps): JSX.Element => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [message, setMessage] = useState<string>('');
+  const [icon, setIcon] = useState<ConfirmIcons | undefined>(undefined);
   const [resolvePromise, setResolvePromise] = useState<((value: boolean) => void) | null>(null);
 
-  const showConfirm = (msg: string): Promise<boolean> => {
+  const showConfirm = (msg: string, icon?: ConfirmIcons): Promise<boolean> => {
     setMessage(msg);
+    setIcon(icon);
     setIsModalOpen(true);
 
     return new Promise((resolve) => {
@@ -40,7 +42,7 @@ export const ConfirmProvider = ({ children }: ConfirmProviderProps): JSX.Element
   return (
     <ConfirmContext.Provider value={{ showConfirm }}>
       {children}
-      {isModalOpen && <ConfirmModal message={message} onConfirm={handleConfirm} onCancel={handleCancel} />}
+      {isModalOpen && <ConfirmModal message={message} icon={icon} onConfirm={handleConfirm} onCancel={handleCancel} />}
     </ConfirmContext.Provider>
   );
 };

@@ -23,7 +23,7 @@ export const TaskCard = ({ task }: TaskCardProps) => {
   const handleEditFormVisibility = () => setEditFormVisibility(!editFormVisibility);
 
   const handleDelete = async (): Promise<void> => {
-    const isConfirmed = await showConfirm('Are you sure you want to delete this?');
+    const isConfirmed = await showConfirm('Are you sure you want to delete this?', 'trash');
 
     if (!isConfirmed) return;
 

@@ -21,7 +21,7 @@ export const UserMenu = ({ user }: UserMenuProps) => {
   const router = useRouter();
 
   const handleLogout = async () => {
-    const isConfirmed = await showConfirm('Are you sure that you want to logout?');
+    const isConfirmed = await showConfirm('Are you sure that you want to logout?', 'logout');
 
     if (!isConfirmed) return;
 
