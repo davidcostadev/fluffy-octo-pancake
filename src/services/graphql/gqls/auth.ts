@@ -22,3 +22,9 @@ export const AUTH_LOGOUT = gql`
     authLogout
   }
 `;
+
+export const AUTH_REGISTER = gql`
+  mutation AuthRegister($input: AuthRegisterInput!) {
+    authRegister(input: $input)
+  }
+`;

@@ -1,7 +1,7 @@
 import { type VariantProps, cva } from 'class-variance-authority';
 
 const inputVariants = cva(
-  'border rounded-lg font-semibold active:outline-none focus:outline-none  focus:ring-1 focus:ring-opacity-50 disabled:opacity-50',
+  'border rounded-lg font-semibold active:outline-none focus:outline-none  focus:ring-1 focus:ring-opacity-50 disabled:opacity-50 w-full',
   {
     variants: {
       variant: {

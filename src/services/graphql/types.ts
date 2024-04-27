@@ -168,6 +168,12 @@ export type AuthLogoutMutationVariables = Exact<{ [key: string]: never }>;
 
 export type AuthLogoutMutation = { __typename?: 'Mutation'; authLogout?: string | null };
 
+export type AuthRegisterMutationVariables = Exact<{
+  input: AuthRegisterInput;
+}>;
+
+export type AuthRegisterMutation = { __typename?: 'Mutation'; authRegister?: string | null };
+
 export type TaskFragment = {
   __typename?: 'Task';
   isCompleted: boolean;
