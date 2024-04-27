@@ -12,7 +12,7 @@ export default async function HomePage() {
         <div className="mx-auto max-w-screen-md px-5">
           <div className="flex flex-col gap-10 pb-12 pt-32">
             <h1 className=" text-6xl leading-snug text-white">
-              Welcome me to the <span className="font-medium">best</span> TODO list of your life!
+              Welcome to the <span className="font-medium">best</span> TODO list of your life!
             </h1>
             <p className="text-lg italic text-white/50">Just kidding, it{"'"}s just a simple TODO list</p>
           </div>
