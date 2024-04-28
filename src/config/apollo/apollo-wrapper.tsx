@@ -19,7 +19,7 @@ function makeClient(token?: string | null) {
       return {
         headers: {
           ...context.headers,
-          authorization: token ? `Bearer ${token}` : '2',
+          ...(token ? { Authorization: `Bearer ${token}` } : {}),
         },
       };
     });
