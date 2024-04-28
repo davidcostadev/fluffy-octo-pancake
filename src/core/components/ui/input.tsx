@@ -22,15 +22,14 @@ const inputVariants = cva(
   },
 );
 
-interface InputVariantProps extends VariantProps<typeof inputVariants> {
-  inputRef?: React.Ref<HTMLInputElement>;
-}
+interface InputVariantProps extends VariantProps<typeof inputVariants> {}
 
 interface InputAttributes extends React.InputHTMLAttributes<HTMLInputElement> {}
 
 export type InputBaseProps = InputVariantProps & Omit<InputAttributes, 'size'>;
 
 export type InputProps = InputBaseProps & {
+  inputRef?: React.Ref<HTMLInputElement>;
   errorMessage?: string;
 };
 
