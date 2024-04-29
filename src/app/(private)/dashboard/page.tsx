@@ -1,29 +1,27 @@
+import { Suspense } from 'react';
+
 import { TaskAdd } from 'app/components/task-add';
 import { TaskCompletedList } from 'app/components/task-completed-list';
 import { TaskPendingList } from 'app/components/task-pending-list';
+import { DashboardLayout } from 'core/components/layouts/dashboard-layout';
+import { UserMenuLoading } from 'core/components/loading-placeholders/user-menu-loading';
 import { HeaderBrand } from 'core/components/ui/header-brand';
-import { getSession } from 'services/session/get-session';
+import { UserMenuWrapper } from 'core/server-components/user-menu-wrapper';
 
-import { UserMenu } from './components/user-menu';
-
-export default async function Home() {
-  const { user } = await getSession();
-
-  if (!user) {
-    return null;
-  }
-
+export default function Home() {
   return (
-    <main className="mx-auto max-w-screen-lg px-4 sm:px-5">
+    <DashboardLayout>
       <header className="flex justify-between py-10">
         <HeaderBrand />
         <div className="flex items-center">
-          <UserMenu user={user} />
+          <Suspense fallback={<UserMenuLoading />}>
+            <UserMenuWrapper />
+          </Suspense>
         </div>
       </header>
       <TaskPendingList />
       <TaskAdd />
       <TaskCompletedList />
-    </main>
+    </DashboardLayout>
   );
 }
