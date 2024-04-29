@@ -99,7 +99,7 @@ export const TaskCard = ({ task }: TaskCardProps) => {
           <Circle size={20} />
         )}
       </button>
-      <div className="flex flex-1 flex-col gap-2">
+      <div className="flex flex-1 flex-col justify-center gap-2">
         <h4
           className={clsx('text-sm font-semibold text-slate-900', {
             'text-opacity-50 line-through': task.isCompleted,
@@ -108,14 +108,16 @@ export const TaskCard = ({ task }: TaskCardProps) => {
         >
           {task.title}
         </h4>
-        <p
-          className={clsx('min-h-5 text-sm text-slate-900', {
-            'text-opacity-20 line-through': task.isCompleted,
-            'text-opacity-50': !task.isCompleted,
-          })}
-        >
-          {task.description}
-        </p>
+        {!!task.description && (
+          <p
+            className={clsx('min-h-5 text-sm text-slate-900', {
+              'text-opacity-20 line-through': task.isCompleted,
+              'text-opacity-50': !task.isCompleted,
+            })}
+          >
+            {task.description}
+          </p>
+        )}
       </div>
       <div className="flex gap-1 opacity-0 transition-opacity group-hover:opacity-100">
         <Button type="button" variant="ghost" size="icon" onClick={handleEditFormVisibility}>
