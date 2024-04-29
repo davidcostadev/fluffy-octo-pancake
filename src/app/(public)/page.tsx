@@ -27,10 +27,10 @@ export default async function HomePage() {
               </Button>
             ) : (
               <>
-                <Button href="/auth/login" variant="ghost">
+                <Button href="/auth" variant="ghost">
                   Login
                 </Button>
-                <Button href="/auth/register" variant="success">
+                <Button href="/auth" variant="success">
                   Register
                 </Button>
               </>

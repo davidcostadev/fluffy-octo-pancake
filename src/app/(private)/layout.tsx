@@ -14,7 +14,7 @@ const ProtectedLayout = async ({ children }: Props) => {
   const session = await getSession();
 
   if (!session.token) {
-    redirect('/auth/login');
+    redirect('/auth');
   }
 
   return <>{children}</>;

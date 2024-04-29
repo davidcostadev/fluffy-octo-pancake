@@ -10,7 +10,6 @@ import z from 'zod';
 
 import { InputControlled } from 'core/components/forms/controlled/input-controlled';
 import { Button } from 'core/components/ui/button';
-import { Link } from 'core/components/ui/link';
 import { LoginSchema } from 'core/validations/auth-schema';
 import { useAuthLoginMutation } from 'services/graphql/hooks';
 
@@ -79,11 +78,7 @@ export const LoginForm = () => {
         placeholder="Enter your password"
         disabled={formLoading}
       />
-      <div className="flex items-center justify-between py-4">
-        <Link href="/auth/register" title="Create an account">
-          Create an account
-        </Link>
-
+      <div className="flex justify-end py-4">
         <Button type="submit" variant="success" disabled={formLoading} aria-label="Login">
           {formLoading ? (
             <>

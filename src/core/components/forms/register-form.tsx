@@ -2,20 +2,16 @@
 
 import { zodResolver } from '@hookform/resolvers/zod';
 import { LoaderCircle } from 'lucide-react';
-import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-hot-toast';
 import z from 'zod';
 
 import { InputControlled } from 'core/components/forms/controlled/input-controlled';
 import { Button } from 'core/components/ui/button';
-import { Link } from 'core/components/ui/link';
 import { RegisterSchema } from 'core/validations/auth-schema';
 import { useAuthRegisterMutation } from 'services/graphql/hooks';
 
 export const RegisterForm = () => {
-  const router = useRouter();
-
   const [register] = useAuthRegisterMutation();
 
   const form = useForm<z.infer<typeof RegisterSchema>>({
@@ -31,6 +27,7 @@ export const RegisterForm = () => {
   const {
     handleSubmit,
     control,
+    reset,
     formState: { errors, isSubmitting },
   } = form;
 
@@ -45,7 +42,7 @@ export const RegisterForm = () => {
 
       if (data?.authRegister) {
         toast.success('Successfully registered, now you can login!');
-        router.push('/auth/login');
+        reset();
       } else {
         throw new Error('Failed to register');
       }
@@ -98,14 +95,7 @@ export const RegisterForm = () => {
         placeholder="Enter your password"
         disabled={formLoading}
       />
-      <div className="flex items-center justify-between py-4">
-        <div>
-          <div className="text-sm">Do you already have an account?</div>
-          <Link href="/auth/login" title="Login here">
-            Login here
-          </Link>
-        </div>
-
+      <div className="flex justify-end py-4">
         <Button type="submit" variant="success" disabled={formLoading} aria-label="Register">
           {formLoading ? (
             <>
