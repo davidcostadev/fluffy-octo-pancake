@@ -83,10 +83,10 @@ export const TaskEditForm = ({ onCancel, onSave, task }: TaskEditFormProps) => {
         maxLength={255}
       />
       <div className="flex justify-end gap-2">
-        <Button type="button" variant="default" onClick={onCancel} disabled={isSubmitting}>
+        <Button type="button" variant="default" onClick={onCancel} disabled={isSubmitting} aria-label="Cancel">
           Cancel
         </Button>
-        <Button type="submit" variant="success" disabled={isSubmitting}>
+        <Button type="submit" variant="success" disabled={isSubmitting} aria-label="Save">
           {isSubmitting ? (
             <>
               <LoaderCircle size={20} className="animate-spin" />

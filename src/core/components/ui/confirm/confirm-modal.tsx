@@ -30,11 +30,11 @@ export const ConfirmModal = ({ icon, message, onCancel, onConfirm }: ConfirmModa
       <div className="mt-10 flex flex-col gap-2 rounded-lg bg-white p-6 shadow-lg" onClick={handleModalClick}>
         <h2 className="font-inter text-lg font-semibold">{message}</h2>
         <div className="mt-4 flex justify-end space-x-4">
-          <Button type="button" onClick={onCancel}>
+          <Button type="button" onClick={onCancel} aria-label="Cancel">
             Cancel
           </Button>
 
-          <Button type="button" variant="danger" onClick={onConfirm}>
+          <Button type="button" variant="danger" onClick={onConfirm} aria-label="Confirm">
             {iconComponent} Confirm
           </Button>
         </div>

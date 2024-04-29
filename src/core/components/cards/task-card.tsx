@@ -87,9 +87,11 @@ export const TaskCard = ({ task }: TaskCardProps) => {
     >
       <button
         type="button"
-        className="h-[36px] w-[36px] rounded-lg p-2 hover:bg-gray-100 active:bg-gray-100 disabled:bg-gray-100 disabled:opacity-80"
+        className="h-[36px] w-[36px] rounded-lg p-2 hover:bg-gray-100 focus-visible:outline-purple-500 active:bg-gray-100 disabled:bg-gray-100 disabled:opacity-80"
         onClick={handleOnToggleComplete}
         disabled={isUpdating}
+        aria-pressed={task.isCompleted}
+        aria-label={task.isCompleted ? 'Mark as pending' : 'Mark as completed'}
       >
         {isUpdating ? (
           <LoaderCircle size={20} className="animate-spin" />
@@ -119,11 +121,25 @@ export const TaskCard = ({ task }: TaskCardProps) => {
           </p>
         )}
       </div>
-      <div className="flex gap-1 opacity-0 transition-opacity group-hover:opacity-100">
-        <Button type="button" variant="ghost" size="icon" onClick={handleEditFormVisibility}>
+      <div className="flex gap-1">
+        <Button
+          type="button"
+          variant="ghost"
+          size="icon"
+          onClick={handleEditFormVisibility}
+          className="opacity-0 transition-opacity focus:opacity-100 group-hover:opacity-100"
+          aria-label="Edit task"
+        >
           <Edit size={16} />
         </Button>
-        <Button type="button" variant="ghost" size="icon" onClick={handleDelete}>
+        <Button
+          type="button"
+          variant="ghost"
+          size="icon"
+          onClick={handleDelete}
+          className="opacity-0 transition-opacity focus:opacity-100 group-hover:opacity-100"
+          aria-label="Delete task"
+        >
           <Trash2 size={16} />
         </Button>
       </div>

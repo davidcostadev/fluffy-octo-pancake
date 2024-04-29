@@ -101,10 +101,12 @@ export const RegisterForm = () => {
       <div className="flex items-center justify-between py-4">
         <div>
           <div className="text-sm">Do you already have an account?</div>
-          <Link href="/auth/login">Login here</Link>
+          <Link href="/auth/login" title="Login here">
+            Login here
+          </Link>
         </div>
 
-        <Button type="submit" variant="success" disabled={formLoading}>
+        <Button type="submit" variant="success" disabled={formLoading} aria-label="Register">
           {formLoading ? (
             <>
               <LoaderCircle size={20} className="animate-spin" />

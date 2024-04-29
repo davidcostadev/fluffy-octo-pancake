@@ -18,7 +18,7 @@ export const TaskAdd = () => {
   if (!formVisibility) {
     return (
       <div className="py-2">
-        <Button type="button" variant="ghost" size="small" onClick={handleFormVisibility}>
+        <Button type="button" variant="ghost" size="small" onClick={handleFormVisibility} aria-label="Add task">
           <Plus size={14} className="text-purple-500" />
           <span>Add task</span>
         </Button>

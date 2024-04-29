@@ -2,7 +2,7 @@ import { type VariantProps, cva } from 'class-variance-authority';
 import Link from 'next/link';
 
 const buttonVariants = cva(
-  'inline-flex items-center rounded-lg gap-2 disabled:opacity-50 disabled:cursor-not-allowed',
+  'inline-flex items-center rounded-lg gap-2 disabled:opacity-50 disabled:cursor-not-allowed focus-visible:outline-purple-500',
   {
     variants: {
       variant: {

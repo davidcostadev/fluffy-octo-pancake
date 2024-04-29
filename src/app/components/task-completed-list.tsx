@@ -75,7 +75,9 @@ const ToggleCollapseButton = ({ isCollapsed, onClick, children }: ToggleCollapse
   return (
     <button
       type="button"
-      className="flex gap-1  text-xs font-normal text-slate-500 hover:text-slate-900"
+      className="flex gap-1  text-xs font-normal text-slate-500 hover:text-slate-900 focus-visible:outline-purple-500"
+      aria-label={isCollapsed ? 'Expand' : 'Collapse'}
+      aria-pressed={isCollapsed}
       onClick={onClick}
     >
       {isCollapsed ? <ChevronRight size={16} /> : <ChevronDown size={16} />}

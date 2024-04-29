@@ -80,9 +80,11 @@ export const LoginForm = () => {
         disabled={formLoading}
       />
       <div className="flex items-center justify-between py-4">
-        <Link href="/auth/register">Create an account</Link>
+        <Link href="/auth/register" title="Create an account">
+          Create an account
+        </Link>
 
-        <Button type="submit" variant="success" disabled={formLoading}>
+        <Button type="submit" variant="success" disabled={formLoading} aria-label="Login">
           {formLoading ? (
             <>
               <LoaderCircle size={20} className="animate-spin" />
