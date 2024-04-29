@@ -1,12 +1,13 @@
 import { Suspense } from 'react';
 
-import { TaskAdd } from 'app/components/task-add';
-import { TaskCompletedList } from 'app/components/task-completed-list';
-import { TaskPendingList } from 'app/components/task-pending-list';
 import { DashboardLayout } from 'core/components/layouts/dashboard-layout';
 import { UserMenuLoading } from 'core/components/loading-placeholders/user-menu-loading';
 import { HeaderBrand } from 'core/components/ui/header-brand';
 import { UserMenuWrapper } from 'core/server-components/user-menu-wrapper';
+
+import { TaskAdd } from './components/task-add';
+import { TaskCompletedList } from './components/task-completed-list';
+import { TaskPendingList } from './components/task-pending-list';
 
 export default function Home() {
   return (
